@@ -66,10 +66,9 @@ Reading [Advanced usage of authentication and authorization in Azure App Service
 
 ## Fine prints
 
-This package is not supported by Microsoft and by using this package, you agree that no support will be provided. Issues can be opened and I will do my best to resolve them. There is no guarantee provided with this package in any sort, kind, nor will there be in the future. While this coded was created while I'm employed at Microsoft, it hasn't gone through security review, code review, etc. 
+This package is not supported by Microsoft and by using this package, you agree that no support will be provided. Issues can be opened and I will do my best to resolve them. There is no guarantee provided with this package in any sort, kind, nor will there be in the future. While this coded was created while I'm employed at Microsoft, it hasn't gone through security review, code review, etc.
 
 Use at your own risk.
-
 
 [EasyAuth]: https://docs.microsoft.com/azure/app-service/overview-authentication-authorization?WT.mc_id=easyauth-github-marouill
 [NuGetPackage]: https://www.nuget.org/packages/MaximeRouiller.Azure.AppService.EasyAuth/
