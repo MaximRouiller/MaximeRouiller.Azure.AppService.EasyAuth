@@ -1,7 +1,7 @@
 # MaximeRouiller.Azure.AppService.EasyAuth
 
 [![Build Status](https://dev.azure.com/marouill/Azure.AppService.EasyAuth/_apis/build/status/MaximRouiller.MaximeRouiller.Azure.AppService.EasyAuth?branchName=master)](https://dev.azure.com/marouill/Azure.AppService.EasyAuth/_build/latest?definitionId=5&branchName=master)
-![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/MaximeRouiller.Azure.AppService.EasyAuth.svg)
+[![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/MaximeRouiller.Azure.AppService.EasyAuth.svg)][NuGetPackage]
 
 This is a temporary project meant as a workaround for people wanting to use [Azure AppService EasyAuth][EasyAuth].
 
@@ -71,5 +71,5 @@ This package is not supported by Microsoft and by using this package, you agree 
 Use at your own risk.
 
 
-[EasyAuth]: https://docs.microsoft.com/en-us/azure/app-service/overview-authentication-authorization
-[NuGetPackage]: todo
+[EasyAuth]: https://docs.microsoft.com/azure/app-service/overview-authentication-authorization?WT.mc_id=easyauth-github-marouill
+[NuGetPackage]: https://www.nuget.org/packages/MaximeRouiller.Azure.AppService.EasyAuth/
