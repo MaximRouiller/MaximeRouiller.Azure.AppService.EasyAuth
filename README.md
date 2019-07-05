@@ -1,6 +1,7 @@
 # MaximeRouiller.Azure.AppService.EasyAuth
 
 [![Build Status](https://dev.azure.com/marouill/Azure.AppService.EasyAuth/_apis/build/status/MaximRouiller.MaximeRouiller.Azure.AppService.EasyAuth?branchName=master)](https://dev.azure.com/marouill/Azure.AppService.EasyAuth/_build/latest?definitionId=5&branchName=master)
+![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/MaximeRouiller.Azure.AppService.EasyAuth.svg)
 
 This is a temporary project meant as a workaround for people wanting to use [Azure AppService EasyAuth][EasyAuth].
 
