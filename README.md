@@ -1,5 +1,7 @@
 # MaximeRouiller.Azure.AppService.EasyAuth
 
+[![Build Status](https://dev.azure.com/marouill/Azure.AppService.EasyAuth/_apis/build/status/MaximRouiller.MaximeRouiller.Azure.AppService.EasyAuth?branchName=master)](https://dev.azure.com/marouill/Azure.AppService.EasyAuth/_build/latest?definitionId=5&branchName=master)
+
 This is a temporary project meant as a workaround for people wanting to use [Azure AppService EasyAuth][EasyAuth].
 
 This provides support for filling up the `ClaimsPrincipal` from an application that is already logged in through [EasyAuth][EasyAuth].
