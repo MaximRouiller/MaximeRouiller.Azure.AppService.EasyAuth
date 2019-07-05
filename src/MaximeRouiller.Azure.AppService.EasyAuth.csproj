@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Maxime Rouiller</Authors>
+    <Title>MaximeRouiller.Azure.AppService.EasyAuth</Title>
+    <PackageTags>azure;appservice;easyauth</PackageTags>
+    <PackageProjectUrl>https://github.com/MaximRouiller/MaximeRouiller.Azure.AppService.EasyAuth</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/MaximRouiller/MaximeRouiller.Azure.AppService.EasyAuth</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryBranch>master</RepositoryBranch>
   </PropertyGroup>
 
   <ItemGroup>

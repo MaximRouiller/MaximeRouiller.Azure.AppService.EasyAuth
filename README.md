@@ -16,7 +16,13 @@ The authentication provider provided by [EasyAuth][EasyAuth] that were tested we
 
 ## How to setup
 
-First, install the NuGet package `<todo>`. Once the package is installed, make sure that Controllers that require authentication are decorated with the `[Authorize(AuthenticationSchemes = "EasyAuth")]` attribute. This attribute can be set anywhere as long as it uses the right `AuthenticationSchemes`.
+First, install the NuGet package [`MaximeRouiller.Azure.AppService.EasyAuth`](https://www.nuget.org/packages/MaximeRouiller.Azure.AppService.EasyAuth/). This can be done either directly from Visual Studio or by running a CLI command like the following.
+
+```bash
+dotnet add package MaximeRouiller.Azure.AppService.EasyAuth -v 0.1.0-{Build Number}
+```
+
+Once the package is installed, make sure that Controllers that require authentication are decorated with the `[Authorize(AuthenticationSchemes = "EasyAuth")]` attribute. This attribute can be set anywhere as long as it uses the right `AuthenticationSchemes`.
 
 ### Controller
 
