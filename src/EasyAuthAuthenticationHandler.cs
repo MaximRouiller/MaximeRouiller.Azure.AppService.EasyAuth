@@ -26,7 +26,7 @@ namespace MaximeRouiller.Azure.AppService.EasyAuth
         {
             try
             {
-                bool easyAuthEnabled = String.Equals(Environment.GetEnvironmentVariable("WEBSITE_AUTH_ENABLED"), "True", StringComparison.InvariantCultureIgnoreCase);
+                bool easyAuthEnabled = String.Equals(Environment.GetEnvironmentVariable("WEBSITE_AUTH_ENABLED", EnvironmentVariableTarget.Process), "True", StringComparison.InvariantCultureIgnoreCase);
                 if (easyAuthEnabled) return Task.FromResult(AuthenticateResult.NoResult());
                 
                 string easyAuthProvider = Context.Request.Headers["X-MS-CLIENT-PRINCIPAL-IDP"].FirstOrDefault();
