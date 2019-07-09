@@ -4,9 +4,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Net.Http;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -28,10 +26,12 @@ namespace MaximeRouiller.Azure.AppService.EasyAuth
         {
             try
             {
+                bool easyAuthEnabled = String.Equals(Environment.GetEnvironmentVariable("WEBSITE_AUTH_ENABLED"), "True", StringComparison.InvariantCultureIgnoreCase);
+                if (easyAuthEnabled) return Task.FromResult(AuthenticateResult.NoResult());
+                
                 string easyAuthProvider = Context.Request.Headers["X-MS-CLIENT-PRINCIPAL-IDP"].FirstOrDefault();
                 string msClientPrincipalEncoded = Context.Request.Headers["X-MS-CLIENT-PRINCIPAL"].FirstOrDefault();
-
-                if (string.IsNullOrWhiteSpace(easyAuthProvider) || string.IsNullOrWhiteSpace(msClientPrincipalEncoded)) return Task.FromResult(AuthenticateResult.NoResult());
+                if (String.IsNullOrWhiteSpace(msClientPrincipalEncoded)) return Task.FromResult(AuthenticateResult.NoResult());
 
                 byte[] decodedBytes = Convert.FromBase64String(msClientPrincipalEncoded);
                 string msClientPrincipalDecoded = System.Text.Encoding.Default.GetString(decodedBytes);
