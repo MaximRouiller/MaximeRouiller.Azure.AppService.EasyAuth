@@ -43,6 +43,8 @@ namespace MaximeRouiller.Azure.AppService.EasyAuth
                 
                 AuthenticationTicket ticket = new AuthenticationTicket(principal, easyAuthProvider);
                 AuthenticateResult success = AuthenticateResult.Success(ticket);
+                Context.User = principal;
+
                 return Task.FromResult(success);
             }
             catch (Exception ex)
