@@ -54,15 +54,15 @@ public void ConfigureServices(IServiceCollection services)
 
 ## How does it work
 
-This package provide a custom [`AuthenticationHandler`](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1?view=aspnetcore-2.2&WT.mc_id=easyauth-github-marouill) that will interpret the `X-MS-CLIENT-PRINCIPAL-IDP` and `X-MS-CLIENT-PRINCIPAL` HTTP headers that are sent by [EasyAuth][EasyAuth] once a user is logged in.
+This package provide a custom [`AuthenticationHandler`](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1?view=aspnetcore-2.2&WT.mc_id=academic-0000-marouill) that will interpret the `X-MS-CLIENT-PRINCIPAL-IDP` and `X-MS-CLIENT-PRINCIPAL` HTTP headers that are sent by [EasyAuth][EasyAuth] once a user is logged in.
 
-Every Controller action with the `Authorize` attribute mentioned previously will go through this custom `AuthenticationHandler`. The handler will base64 decode the `X-MS-CLIENT-PRINCIPAL` and create a new [`ClaimsPrincipal`](https://docs.microsoft.com/dotnet/api/system.security.claims.claimsprincipal?view=netcore-2.2&WT.mc_id=easyauth-github-marouill) with the claims contained within the header.
+Every Controller action with the `Authorize` attribute mentioned previously will go through this custom `AuthenticationHandler`. The handler will base64 decode the `X-MS-CLIENT-PRINCIPAL` and create a new [`ClaimsPrincipal`](https://docs.microsoft.com/dotnet/api/system.security.claims.claimsprincipal?view=netcore-2.2&WT.mc_id=academic-0000-marouill) with the claims contained within the header.
 
 There is no attempt to validate any tokens of any sort as this is the job of EasyAuth. This package assume that EasyAuth will never forward a malicious `X-MS-CLIENT-PRINCIPAL` and that EasyAuth will never send us an un-authenticated request.
 
 This component will not enable any "challenge" of authentication and only parse the headers sent by EasyAuth. If you want to force the authentication, you can forward your user to `/.auth/login/{provider}`. If you want to automatically redirect your user to certain page, you can add `?post_login_redirect_url=/my-page`.
 
-Reading [Advanced usage of authentication and authorization in Azure App Service](https://docs.microsoft.com/azure/app-service/app-service-authentication-how-to?WT.mc_id=easyauth-github-marouill) will greatly help you understand how to use [EasyAuth][EasyAuth] as well.
+Reading [Advanced usage of authentication and authorization in Azure App Service](https://docs.microsoft.com/azure/app-service/app-service-authentication-how-to?WT.mc_id=academic-0000-marouill) will greatly help you understand how to use [EasyAuth][EasyAuth] as well.
 
 ## Fine prints
 
@@ -70,5 +70,5 @@ This package is not supported by Microsoft and by using this package, you agree 
 
 Use at your own risk.
 
-[EasyAuth]: https://docs.microsoft.com/azure/app-service/overview-authentication-authorization?WT.mc_id=easyauth-github-marouill
+[EasyAuth]: https://docs.microsoft.com/azure/app-service/overview-authentication-authorization?WT.mc_id=academic-0000-marouill
 [NuGetPackage]: https://www.nuget.org/packages/MaximeRouiller.Azure.AppService.EasyAuth/
