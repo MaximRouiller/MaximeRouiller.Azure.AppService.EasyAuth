@@ -80,17 +80,16 @@ using System.Linq;
 public void ConfigureServices(IServiceCollection services)
 {
     //... rest of the file
-    services.AddAuthentication("EasyAuth").AddEasyAuthAuthentication((o => o.Events = new EasyAuthEvents {
-        OnClaimsReceived = (claims) => {
+    services.AddAuthentication("EasyAuth").AddEasyAuthAuthentication(options =>
+        options.Events.OnClaimsReceived = (claims) => {
             var mappedRolesClaims = claims
                 .Where(claim => claim.Type == "roles")
                 .Select(claim => new Claim(ClaimTypes.Role, claim.Value))
                 .ToList();
 
             return Task.FromResult(claims.Concat(mappedRolesClaims));
-        }
-    });
-}
+        });
+    }
 ```
 
 ## How does it work
