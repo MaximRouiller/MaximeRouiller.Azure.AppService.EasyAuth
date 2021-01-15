@@ -80,7 +80,7 @@ using System.Linq;
 public void ConfigureServices(IServiceCollection services)
 {
     //... rest of the file
-    services.AddAuthentication("EasyAuth").AddEasyAuthAuthentication(options =>
+    services.AddAuthentication(EasyAuthAuthenticationDefaults.AuthenticationScheme).AddEasyAuthAuthentication(options =>
         options.Events.OnClaimsReceived = (claims) => {
             var mappedRolesClaims = claims
                 .Where(claim => claim.Type == "roles")
