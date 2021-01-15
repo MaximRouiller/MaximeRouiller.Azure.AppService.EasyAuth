@@ -22,7 +22,7 @@ The authentication provider provided by [EasyAuth][EasyAuth] that were tested we
 First, install the NuGet package [`MaximeRouiller.Azure.AppService.EasyAuth`](https://www.nuget.org/packages/MaximeRouiller.Azure.AppService.EasyAuth/). This can be done either directly from Visual Studio or by running a CLI command like the following.
 
 ```bash
-dotnet add package MaximeRouiller.Azure.AppService.EasyAuth -v 0.1.0-beta82
+dotnet add package MaximeRouiller.Azure.AppService.EasyAuth
 ```
 
 Once the package is installed, make sure that Controllers that require authentication are decorated with the `[Authorize(AuthenticationSchemes = "EasyAuth")]` attribute. This attribute can be set anywhere as long as it uses the right `AuthenticationSchemes`.
@@ -43,13 +43,53 @@ public ActionResult<IEnumerable<string>> Get()
 Add the following line to your `Startup.cs` file.
 
 ```csharp
-using MaximeRouiller.Azure.AppService.EasyAuth
+using MaximeRouiller.Azure.AppService.EasyAuth;
 // ...
 public void ConfigureServices(IServiceCollection services)
 {
     //... rest of the file
     services.AddAuthentication().AddEasyAuthAuthentication((o) => { });
 }
+```
+
+## How to use EasyAuth by default
+
+You may want to use EasyAuth as the default scheme used for authentication.  With this approach it's no longer necessary to provide an `AuthenticationSchemes` with each `Authorize` attribute.  To achieve this you can amend the `Startup.cs` file as follows:
+
+
+```csharp
+using MaximeRouiller.Azure.AppService.EasyAuth;
+// ...
+public void ConfigureServices(IServiceCollection services)
+{
+    //... rest of the file
+    services.AddAuthentication("EasyAuth").AddEasyAuthAuthentication((o) => { });
+}
+```
+
+## How to transform claims
+
+If you have a need to transform the claims that EasyAuth supplies, then there is an `OnClaimsReceived` event available that you can hook into.
+
+For instance, there's a common need to transform the EasyAuth supplied `"roles"` claims into `ClaimsTypes.Role` claims.  This can be acheived as follows:
+
+```csharp
+using MaximeRouiller.Azure.AppService.EasyAuth;
+using System.Linq;
+// ...
+public void ConfigureServices(IServiceCollection services)
+{
+    //... rest of the file
+    services.AddAuthentication(EasyAuthAuthenticationDefaults.AuthenticationScheme).AddEasyAuthAuthentication(options =>
+        options.Events.OnClaimsReceived = (claims) => {
+            var mappedRolesClaims = claims
+                .Where(claim => claim.Type == "roles")
+                .Select(claim => new Claim(ClaimTypes.Role, claim.Value))
+                .ToList();
+
+            return Task.FromResult(claims.Concat(mappedRolesClaims));
+        });
+    }
 ```
 
 ## How does it work

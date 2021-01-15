@@ -9,8 +9,8 @@ namespace MaximeRouiller.Azure.AppService.EasyAuth
             this AuthenticationBuilder builder,
             Action<EasyAuthAuthenticationOptions> configure) =>
                 builder.AddScheme<EasyAuthAuthenticationOptions, EasyAuthAuthenticationHandler>(
-                    "EasyAuth",
-                    "EasyAuth",
+                    EasyAuthAuthenticationDefaults.AuthenticationScheme,
+                    EasyAuthAuthenticationDefaults.AuthenticationScheme,
                     configure);
     }
 }

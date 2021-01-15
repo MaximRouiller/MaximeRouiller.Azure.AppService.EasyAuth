@@ -22,34 +22,36 @@ namespace MaximeRouiller.Azure.AppService.EasyAuth
         {
         }
 
-        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
+        protected async override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             try
             {
                 bool easyAuthEnabled = String.Equals(Environment.GetEnvironmentVariable("WEBSITE_AUTH_ENABLED", EnvironmentVariableTarget.Process), "True", StringComparison.InvariantCultureIgnoreCase);
-                if (!easyAuthEnabled) return Task.FromResult(AuthenticateResult.NoResult());
+                if (!easyAuthEnabled) return AuthenticateResult.NoResult();
                 
                 string easyAuthProvider = Context.Request.Headers["X-MS-CLIENT-PRINCIPAL-IDP"].FirstOrDefault();
                 string msClientPrincipalEncoded = Context.Request.Headers["X-MS-CLIENT-PRINCIPAL"].FirstOrDefault();
-                if (String.IsNullOrWhiteSpace(msClientPrincipalEncoded)) return Task.FromResult(AuthenticateResult.NoResult());
+                if (String.IsNullOrWhiteSpace(msClientPrincipalEncoded)) return AuthenticateResult.NoResult();
 
                 byte[] decodedBytes = Convert.FromBase64String(msClientPrincipalEncoded);
                 string msClientPrincipalDecoded = System.Text.Encoding.Default.GetString(decodedBytes);
                 MsClientPrincipal clientPrincipal = JsonConvert.DeserializeObject<MsClientPrincipal>(msClientPrincipalDecoded);
 
                 ClaimsPrincipal principal = new ClaimsPrincipal();
-                IEnumerable<Claim> claims = clientPrincipal.Claims.Select(x => new Claim(x.Type, x.Value));
+                IEnumerable<Claim> standardClaims = clientPrincipal.Claims.Select(x => new Claim(x.Type, x.Value));
+                IEnumerable<Claim> claims = await Options.Events.OnClaimsReceived(standardClaims);
+
                 principal.AddIdentity(new ClaimsIdentity(claims, clientPrincipal.AuthenticationType, clientPrincipal.NameType, clientPrincipal.RoleType));
                 
                 AuthenticationTicket ticket = new AuthenticationTicket(principal, easyAuthProvider);
                 AuthenticateResult success = AuthenticateResult.Success(ticket);
                 Context.User = principal;
 
-                return Task.FromResult(success);
+                return success;
             }
             catch (Exception ex)
             {
-                return Task.FromResult(AuthenticateResult.Fail(ex));
+                return AuthenticateResult.Fail(ex);
             }
         }
     }
